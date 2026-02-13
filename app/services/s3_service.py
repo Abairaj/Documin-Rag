@@ -12,7 +12,6 @@ BUCKET_NAME = os.getenv("S3_BUCKET")
 
 
 def upload_file(file_obj, key):
+    file_obj.seek(0)
     s3.upload_fileobj(file_obj, BUCKET_NAME, key)
-    # boto will read to end so have to reset
-    file_obj.file.seek(0)
     return key
